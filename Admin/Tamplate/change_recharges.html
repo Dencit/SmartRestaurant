@@ -1,0 +1,302 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">充值管理</a></li>
+    <li><a href="#">充值记录</a></li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="col-sm-2">
+            <input id="search_name" type="text" class="form-control" placeholder="姓名" >
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='endTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_sta' class='form-control' placeholder='开始日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden' value='' />-->
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='staTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_end' class='form-control' placeholder='结束日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden'  value='' />-->
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-primary search">搜索</button>
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-success table_down">导出</button>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 列表&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">RID</th>
+                <th class="th_3x hidden-xs">商户订单号</th>
+                <th class="th_2x">姓名</th>
+                <th class="th_2x">充值金额</th>
+                <th class="th_2x">补贴金额</th>
+                <th class="th_2x hidden-xs">收银员</th>
+                <th class="th_3x hidden-xs">充值时间</th>
+                <th class="hidden-xs">ip</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"recharges"}}
+            <tr>
+                <th class="hidden-xs" id="[[recharge_id]]" scope="row">[[recharge_id]]</th>
+                <td class="hidden-xs">[[out_trade_no]]</td>
+                <td>[[uid]]</td>
+                <td>[[recharge_menoy]]</td>
+                <td>[[subsidy_menoy]]</td>
+                <td class="hidden-xs">[[cid]]</td>
+                <td class="hidden-xs">[[time]]</td>
+                <td class="hidden-xs">[[ip]]</td>
+
+
+            </tr>
+            {{/forList::"recharges"}}
+            <tr><td colspan="8" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_url]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">UID</label>
+                <div class="col-sm-10">
+                    <input id="a1" type="text" class="form-control" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a2" class="col-sm-2 control-label">OPEN-ID</label>
+                <div class="col-sm-10">
+                    <input id="a2" type="text" class="form-control" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a10" class="col-sm-2 control-label">注册时间</label>
+                <div class="col-sm-10">
+                    <input id="a10" type="text" class="form-control" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a11" class="col-sm-2 control-label">登录时间</label>
+                <div class="col-sm-10">
+                    <input id="a11" type="text" class="form-control" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a3" class="col-sm-2 control-label">昵称</label>
+                <div class="col-sm-10">
+                    <input id="a3" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a4" class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-10">
+                    <input id="a4" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a5" class="col-sm-2 control-label">积分</label>
+                <div class="col-sm-10">
+                    <input id="a5" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a6" class="col-sm-2 control-label">手机</label>
+                <div class="col-sm-10">
+                    <input id="a6" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a7" class="col-sm-2 control-label">地址</label>
+                <div class="col-sm-10">
+                    <input id="a7" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label for="a8" class="col-sm-2 control-label">身份</label>
+                <div class="col-sm-10">
+                    <select id="a8" class="form-control">
+                        <option value="1">会员</option>
+                        <option value="2">员工</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a9" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea id="a9" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success chanel">取消</button>
+                    <div class="padding"></div>
+                    <button type="button" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////搜索动作
+    $name=$('#search_name');
+    $sta=$('#search_sta');
+    $end=$('#search_end');
+    $(document).ready(function(){
+        $name.val( pathReq('name') );
+        $sta.val( pathReq('sta') );
+        $end.val( pathReq('end') );
+    });
+    function searchInput(){
+        $name_v=$name.val();
+        $sta_v=$sta.val();
+        $end_v=$end.val();
+        $uri='';
+        if($name_v){ $uri+="/name-"+$name_v; }
+        if($sta_v){ $uri+="/sta-"+$sta_v; }
+        if($end_v){ $uri+="/end-"+$end_v; }
+        return $uri;
+    }
+    $('button.search').bind('click',function(){
+        $uri=searchInput();
+        window.location.href='{{base_url}}'+$uri;
+    });
+    //\\
+
+    ////导出表格
+    $('button.table_down').bind('click',function(){
+        $uri=searchInput();
+        if($sta.val()==''||$end.val()==''){ modalbox('日期信息不全！',1);  return false ; }
+        window.open('{{base_url}}'+$uri+'/table-1/');
+    });
+    //\\
+
+
+</script>

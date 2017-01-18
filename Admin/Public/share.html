@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta name="x5-orientation" content="portrait">
+	<link rel="stylesheet" href="css/style.css" />
+    <!--<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="../../Static/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+
+	<!--loading-->
+	<section id="loading" class="loader">
+		<div class="spinner">
+			<p><img src="images/loading.svg" /></p>
+			<p>加载中……</p>
+		</div>
+	</section>
+	<!--//loading-->
+
+
+
+	<p>share</p>
+
+
+    <script src="../../Static/common/common.js"></script>
+    <script src="../../Static/common/ajax.js"></script>
+    <!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" ></script>-->
+    <script type="text/javascript" src="../../Static/weixin/jweixin-1.0.0.js" ></script>
+    <script type="text/javascript" src="../../Static/weixin/weixinShare.js" ></script>
+
+	<script>
+
+        //#share=&sid=
+
+        $sid=htmReq('sid');
+        $fNick='0';
+
+        $(document).ready(function(){
+
+            ajax.post('../?/index/shareState/',{"state":'shareState',"sid":$sid},function(result){
+                ckUid(result);//微信登陆检验
+                ckSid(result);//没有分享id不能进入
+
+                switch(result.shareReturn){
+                    case 'shareStatuOk':
+                        $fNick=result.nick;
+                        break;
+                }
+
+            },'1');//显示
+
+
+            $playState='sharePlay';
+            __shareData.title=$fNick+"的已参与标题修改";
+            __shareData.desc=$fNick+"的已参与描述修改";
+            __shareData.link=allLink+"/?/weixin/index/sid-"+$sid+"/";
+            __jweixin();
+            iObjCon(__shareData);//
+
+        });
+
+		$(window).load(function(){
+			$("#loading").fadeOut();
+		});
+
+
+
+	</script>
+
+</body>
+</html>

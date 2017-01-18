@@ -1,0 +1,204 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">基本管理</a></li>
+    <li><a href="#">自定义菜单</a></li>
+</ol>
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 列表&nbsp;&nbsp;
+            <span class="badge badge_diy">6</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="#add" id="add-tab" data-toggle="tab"> 新增 </a>
+    </li>
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">ID</th>
+                <th class="th_nomal">类型</th>
+                <th class="th_2x">名称</th>
+                <th class="hidden-xs">链接</th>
+                <th class="th_edit">编辑</th>
+                <th class="th_del">删除</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"menu"}}
+            <tr class="[[style]]">
+                <th class="hidden-xs" id="[[id]]" scope="row">[[id]]</th>
+                <td>[[type]]</td>
+                <td>[[menu]]</td>
+                <td class="hidden-xs">[[link]]</td>
+                <td>
+                    <button type="button" class="btn btn-primary edit">编辑</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            {{/forList::"menu"}}
+
+            </tbody>
+
+        </table>
+
+        <div class="panel panel-default text-center" style="margin-bottom: 0;">
+            <div class="panel-body" >
+                <button type="button" class="btn btn-primary">更新微信菜单</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+    <div class="tab-pane fade" id="add">
+
+        <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">菜单名称</label>
+                <div class="col-sm-10">
+                    <input id="a1" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a2" class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select id="a2" class="form-control">
+                        <option selected disabled>选择</option>
+                        <option value="1">主导航</option>
+                        <option value="2">子导航</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a3" class="col-sm-2 control-label">链接</label>
+                <div class="col-sm-10">
+                    <input id="a3" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a4" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea id="a4" type="text" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-default text-center" style="margin-bottom: 0;">
+            <div class="panel-body" >
+                <button type="button" class="btn btn-success chanel">取消</button>
+                <div class="padding"></div>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+    </div>
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">菜单名称</label>
+                <div class="col-sm-10">
+                    <input id="a1" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a2" class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select id="a2" class="form-control">
+                        <option selected disabled>选择</option>
+                        <option value="1">主导航</option>
+                        <option value="2">子导航</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a3" class="col-sm-2 control-label">链接</label>
+                <div class="col-sm-10">
+                    <input id="a3" type="text" class="form-control">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a4" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea id="a4" type="text" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-default text-center" style="margin-bottom: 0;">
+            <div class="panel-body" >
+                <button type="button" class="btn btn-success chanel">取消</button>
+                <div class="padding"></div>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+    $('button.edit').click(function(){
+        $aid=$(this).parent().parent().find('th').text();
+        if($aid!=''){
+            $('#myTabs #edit-tab').show();
+            $('#myTabs a[href="#edit"]').tab('show');
+            //alert( 'aid:'+$aid );
+        }
+    });
+
+    $('button.chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+</script>

@@ -1,0 +1,132 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">基本管理</a></li>
+    <li><a href="#">系统日志</a></li>
+</ol>
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 系统日志&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="hidden-xs">LID</th>
+                <th class="th_2x">类型</th>
+                <th class="hidden-xs">类型描述</th>
+                <th class="">执行时间</th>
+                <th class="hidden-xs ">登陆IP</th>
+
+                <!--<th class="th_del">删除</th>-->
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"system"}}
+            <tr>
+                <th class="hidden-xs" id="[[log_id]]" scope="row">[[log_id]]</th>
+                <td>[[type_name]]</td>
+                <td class="hidden-xs">[[desc]]</td>
+                <td >[[time]]</td>
+                <td class="hidden-xs">[[ip]]</td>
+
+
+                <!--<td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>-->
+            </tr>
+            {{/forList::"system"}}
+            <tr><td colspan="5" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_num]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+
+    <!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+    $('button.edit').click(function(){
+        $aid=$(this).parent().parent().find('th').text();
+        if($aid!=''){
+            $('#myTabs #edit-tab').show();
+            $('#myTabs a[href="#edit"]').tab('show');
+            //alert( 'aid:'+$aid );
+        }
+    });
+
+    $('button.chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+</script>

@@ -1,0 +1,4 @@
+[2016-12-03 16:46:05][debug] rechData:{"sign":"1DB2ADB9CF652676D5A2BC5710832C1C","openid":"oIeM7s5X74_XbepKP9dQuxkFTnEA","out_trade_no":"141856890220161203164558","transaction_id":"4007022001201612031654421745","return_code":"SUCCESS","recharge_menoy":"22","uid":"18","subsidy_menoy":"0","time":1480754764,"ip":"140.207.54.75"}
+[2016-12-03 16:46:05][debug] [uid:18] in join member recharge success!
+[2016-12-03 16:47:20][debug] rechData:{"sign":"ACCD33C9CA95873E5144C451C47F615E","openid":"oIeM7s5X74_XbepKP9dQuxkFTnEA","out_trade_no":"141856890220161203161306","transaction_id":"4007022001201612031650671025","return_code":"SUCCESS","recharge_menoy":"22","uid":"18","subsidy_menoy":"0","time":1480752793,"ip":"183.3.234.60"}
+[2016-12-03 16:47:20][debug] [uid:18] in join member recharge success!

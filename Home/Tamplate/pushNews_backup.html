@@ -1,0 +1,80 @@
+{{include::"include_head"}}
+
+<section class="page page_footer page_header pushNewsPage">
+    <div class="pushNewsBanner"><img src="Public/img/pushNews_banner.jpg" alt=""></div>
+    <div class="pushNews">
+        <div class="newsConTop clearfix">
+            <p class="fl">{{date}}</p>
+            <p class="fr">{{weekday}}</p>
+        </div>
+
+        <!--<div class="pushNewsList">
+            {{forList::"pushFarther"}}
+            <dl>
+                <dt>[[type]]</dt>
+
+                [[forList::"pushFarther_child"]]
+                <dd>
+                    <a href="javascript:void(0);">
+                        <div class="pushNewsListImg"><img src="[[image]]" alt="[[name]]"></div>
+                        <p class="pushNewsListP">[[name]]</p>
+                    </a>
+                </dd>
+                [[/forList::"pushFarther_child"]]
+
+            </dl>
+            {{/forList::"pushFarther"}}
+        </div>-->
+
+        <div class="pushNewsList">
+
+            {{forList::"pushNews"}}
+
+            <dl>
+                <dt>[[type]]</dt>
+
+                [[forList::"pushNews_child"]]
+                <dd>
+                    <a href="javascript:void(0);">
+                        <div class="pushNewsListImg"><img src="[[image]]" alt="[[name]]"></div>
+                        <p class="pushNewsListP">[[name]]</p>
+                    </a>
+                </dd>
+                [[/forList::"pushNews_child"]]
+
+            </dl>
+
+            {{/forList::"pushNews"}}
+
+
+        </div>
+    </div>
+
+</section>
+
+<footer class="pushFooter footer">
+    <form method="post">
+        <div class="pushNewsF">
+            <p class="pushNewsF_h">是否决定吃{{AoP}}?</p>
+
+            {{forList::"choose"}}
+
+            <label class="pushNewsF_p">
+                <input type="radio" name="food" value="[[type]]" class="hidden_radio"/>
+                <span>[[choose_name]]</span>
+            </label>
+
+            {{/forList::"choose"}}
+
+            <label class="pushNewsF_p">
+                <input type="radio" name="food"  class="hidden_radio"/>
+                <span>不吃</span>
+            </label>
+        </div>
+        <div class="pushNewsSubmit">
+            <input type="submit" value="提交" />
+        </div>
+    </form>
+</footer>
+
+{{include::"include_foot"}}

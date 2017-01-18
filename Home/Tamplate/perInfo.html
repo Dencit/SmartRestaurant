@@ -1,0 +1,41 @@
+{{include::"include_head"}}
+
+<!--<header class="header clearfix">
+    <div class="headerTitle">{{title}}</div>
+</header>-->
+
+<section class="page page_footer page_header">
+    <div class="perInfo">
+        <div class="perInfoHead">
+            <div class="perInfoHeadImg" >
+                <img src="{{photo}}" alt="" >
+                {{sex}}
+            </div>
+        </div>
+        <div class="perInfoDetail">
+            <p class="perInfoDetailName">{{name}}</p>
+            <p class="perInfoDetailCall">{{mobile}}</p>
+            <p class="perInfoDetailDept">{{depart}}</p>
+            <p class="perInfoDetailId">{{idcard}}</p>
+        </div>
+        <div class="perInfoBalance ui-grid-b ">
+            <dl class="ui-block-a">
+                <dt>个人钱包余额</dt>
+                <dd><span class="price_h">￥</span>{{balance}}<span class="price_end"></span></dd>
+            </dl>
+            <dl class="ui-block-b">
+                <dt>补助钱包余额</dt>
+                <dd><span class="price_h">￥</span>{{subsidy}}<span class="price_end"></span></dd>
+            </dl>
+            <dl class="ui-block-c">
+                <dt><a href="?/payment/recharge">余额充值</a></dd>
+                <dt><a href="?/account/conDetail">消费查询</a></dd>
+            </dl>
+        </div>
+    </div>
+
+</section>
+
+{{include::"include_nav"}}
+
+{{include::"include_foot"}}

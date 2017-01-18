@@ -1,0 +1,175 @@
+{{include::"include_head"}}
+
+
+<section class="page page_footer page_header">
+    <div class="recharge">
+        <div class="rechargeBanner"><img src="Public/img/recharge_banner.jpg" alt=""></div>
+        <div class="perInfoBalance ui-grid-a rechargeBalance clearfix">
+            <dl class="ui-block-a">
+                <dt>个人钱包余额</dt>
+                <dd><span class="price_h">￥</span>{{balance}}<span class="price_end"></span></dd>
+            </dl>
+            <dl class="ui-block-b">
+                <dt>补助钱包余额</dt>
+                <dd><span class="price_h">￥</span>{{subsidy}}<span class="price_end"></span></dd>
+            </dl>
+        </div>
+
+        <p class="rechargeTips">
+            在编人员: 个人钱包当月首次充值不小于22元, 补助钱包补助330元,月底自动清零。
+        </p>
+
+        <div class="rechargeInPanel">
+
+            <form class="js_recharge" action="javascript:wxPay();">
+                <p class="rechargeInPanelTitle">请输入充值金额</p>
+                <div class="rechargeInPanelGroup">
+                    <ul class="clearfix">
+                        <li>
+                            <label for="rechareOne">
+                                <p class="num"><i>￥22</i>.00</p>
+                                <input type="radio" name="money" value='22' id="rechareOne" class="hidden_radio" checked/>
+                                <span class="radio_btn icon-success"></span>
+                            </label>
+                            <p class="rechargeInPanelGroupRTips">提示：首次充值22元，补贴早餐</p>
+                        </li>
+                        <li>
+                            <label for="rechareTwo" >
+                                <p class="num"><i>￥44</i>.00</p>
+                                <input type="radio" name="money" value="44" id="rechareTwo" class="hidden_radio" />
+                                <span class="radio_btn icon-success"></span>
+                            </label>
+                            <p class="rechargeInPanelGroupRTips">提示：首次充值44元，补贴早中餐</p>
+                            <br />
+                        </li>
+                        <li>
+                            <label for="rechareThree">
+
+                                其他金额
+                                <input type="text" name="text" value="" id="moneyThree_x" placeholder="0"/>
+
+                                <input type="radio" name="money" id="rechareThree" class="hidden_radio" />
+                                <span class="radio_btn icon-success"></span>
+                            </label>
+                            <p class="rechargeInPanelGroupRTips">提示：首次充值22元，补贴早餐; 充值44元，补贴早中餐</p>
+                        </li>
+                    </ul>
+                    <!--<div class="rechargeInpPanelBenefit">
+                        <p class="p1">充值>=22元</p>
+                        <p class="p2">补助330元</p>
+                    </div>-->
+                </div>
+                <div class="submit_btn">
+                    <a href="javascript:void(0);">
+                        <input type="submit" value="立即充值"/>
+                    </a>
+
+                    {{change::"content"}}
+
+                    <!--模态窗-->
+                    <div class="successPopup_x " style="display: none;">
+                        <a href="?/account/perInfo">
+                            <div class="successPopup" >
+                                <p class="successPopup_h">充值成功!</p>
+                                <p class="successPopup_p">知道了</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!--#模态窗-->
+
+                </div>
+            </form>
+
+
+            <script type="text/javascript">
+                //调用微信JS api 支付
+                $jsApiParameters={};
+
+                function jsApiCall()
+                {
+                    WeixinJSBridge.invoke(
+                            'getBrandWCPayRequest',
+                            $jsApiParameters,
+                    function(res){
+
+                        WeixinJSBridge.log(res.err_msg);
+                        //alert(res.err_code+res.err_desc+res.err_msg);
+                        //alert(res.err_msg);
+                        if( /ok/.test(res.err_msg) ) {
+                            location.replace('/Home/?/payment/recharge/step-1');
+                            //$('.successPopup_x').fadeIn();
+                        }
+
+                    }
+                    );
+                }
+
+                function callpay()
+                {
+                    if (typeof WeixinJSBridge == "undefined"){
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                        }
+                    }else{
+                        jsApiCall();
+                    }
+                }
+
+            </script>
+
+
+            <script>
+
+                function wxPay(){
+
+                    //alert('程序员正在测试！关闭功能。');
+
+                    ajax.formPost($('.js_recharge'),'/Api/?/wxpay/jsApi/',function(result){
+
+                        ajax.msgbox(result,2);
+                         if(result.errcode!='-1'){
+                             $jsApiParameters=result;
+                             callpay();
+                         }
+
+                    });
+
+                    //无接口模式 测试用
+                    /*  ajax.formPost($('.js_recharge'),'?/payment/recharge_ax/',function(result){
+                        ajax.msgbox(result,2);
+                        ajax.msgbox(result);
+
+                    });*/
+
+                }
+
+
+                $(document).ready(function(){
+
+                    $('#moneyThree_x').on('focus',function(){
+
+                        $('#rechareThree').prop("checked",true);
+
+                        console.log( $('.rechareThree') );
+
+                        //$('.rechargeInPanelGroup span').eq(2).css('color',"#666");
+
+                    });
+
+
+                });
+
+
+            </script>
+
+        </div>
+    </div>
+
+</section>
+
+{{include::"include_nav"}}
+
+{{include::"include_foot"}}

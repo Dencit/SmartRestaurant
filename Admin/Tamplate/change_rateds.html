@@ -1,0 +1,306 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">评论管理</a></li>
+    <li><a href="#">评论</a></li>
+</ol>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="col-sm-2">
+            <input id="search_name" type="text" class="form-control" placeholder="姓名" >
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='endTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_sta' class='form-control' placeholder='开始日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden' value='' />-->
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='staTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_end' class='form-control' placeholder='结束日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden'  value='' />-->
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-primary search">搜索</button>
+        </div>
+
+    </div>
+</div>
+
+
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 评论&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">RID</th>
+                <th>姓名</th>
+                <th>食物</th>
+                <th>服务</th>
+                <th>环境</th>
+                <th class="hidden-xs">留言</th>
+                <th class="hidden-xs">时间</th>
+
+                <th class="th_edit">编辑</th>
+                <!--<th class="th_del">删除</th>-->
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"rateds"}}
+            <tr>
+                <th class="hidden-xs" id="[[rated_id]]" scope="row">[[rated_id]]</th>
+                <td>[[uid]]</td>
+                <td>[[food_qual]]</td>
+                <td>[[serv_qual]]</td>
+                <td>[[envi_qual]]</td>
+                <td class="hidden-xs">[[advise]]</td>
+                <td class="hidden-xs">[[time]]</td>
+
+
+                <td>
+                    <button type="button" class="btn btn-primary edit">详细</button>
+                </td>
+
+                <!--<td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>-->
+
+            </tr>
+            {{/forList::"rateds"}}
+            <tr><td colspan="8" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_url]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">RID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control rated_id" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-10">
+                    <input id="a2" type="text" class="form-control name" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">食物</label>
+                <div class="col-sm-10">
+                    <select class="form-control food_qual" readonly>
+                        <option value="A" disabled>好评</option>
+                        <option value="B" disabled>良好</option>
+                        <option value="C" disabled>一般</option>
+                        <option value="D" disabled>差评</option>
+                    </select>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">服务</label>
+                <div class="col-sm-10">
+                    <select class="form-control serv_qual" readonly>
+                        <option value="A" disabled>好评</option>
+                        <option value="B" disabled>良好</option>
+                        <option value="C" disabled>一般</option>
+                        <option value="D" disabled>差评</option>
+                    </select>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">环境</label>
+                <div class="col-sm-10">
+                    <select class="form-control envi_qual" readonly>
+                        <option value="A" disabled>好评</option>
+                        <option value="B" disabled>良好</option>
+                        <option value="C" disabled>一般</option>
+                        <option value="D" disabled>差评</option>
+                    </select>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">留言</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control advise" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">时间</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control time" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success edit_chanel">返回</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////搜索动作
+    $(document).ready(function(){
+
+        $name=pathReq('name');
+        $('#search_name').val( $name );
+
+        $sta=pathReq('sta');
+        $end=pathReq('end');
+        $('#search_sta').val( $sta );
+        $('#search_end').val( $end );
+
+
+    });
+    $('button.search').bind('click',function(){
+        $name=$('#search_name').val();
+        $sta=$('#search_sta').val();
+        $end=$('#search_end').val();
+
+        $uri='';
+        if($name){ $uri+="/name-"+$name; }
+        if($sta){ $uri+="/sta-"+$sta; }
+        if($end){ $uri+="/end-"+$end; }
+
+        window.location.href='{{base_url}}'+$uri;
+    });
+    //\\
+
+    ////编辑动作
+    $edit_selector='#edit';
+    $edit_child='rated_id/.rated_id/val,name/.name/val,' +
+    'food_qual/.food_qual/opt,serv_qual/.serv_qual/opt,envi_qual/.envi_qual/opt,' +
+    'advise/.advise/val,time/.time/val';
+    $filter='';
+
+    $('button.edit').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowid );//
+        if($rowId!=''){
+            $data={};$data.rowId=$rowId;
+            ajax.post('?/rated/rateds_edit_ax',$data,function(result){
+                //console.log(result);//
+                $data_get=result.data;
+                ajax.setResult($edit_selector,$edit_child,$data_get);
+                $('#myTabs #edit-tab').show();
+                $('#myTabs a[href="#edit"]').tab('show');
+            });
+        }
+    });
+
+    $('button.edit_chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+    //\\
+
+</script>

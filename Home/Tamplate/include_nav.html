@@ -1,0 +1,36 @@
+<footer class="footer">
+    <ul class="_js_nav">
+        <li>
+            <a href="?/info/news">
+                <span class="icon-order"></span>
+                <p class="footer_p">餐饮下单</p>
+            </a>
+        </li>
+        <li>
+            <a href="?/account/advise">
+                <span class="icon-write"></span>
+                <p class="footer_p">点评建议</p>
+            </a>
+        </li>
+        <li>
+            <a href="?/account/perInfo">
+                <span class="icon-account"></span>
+                <p class="footer_p">个人信息</p>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+
+<script>
+
+    $nav_active= {{nav_active}} ;
+
+    $(document).ready(function() {
+
+        $('._js_nav li').eq($nav_active).addClass('active');//底部导航高亮
+
+    });
+
+
+</script>

@@ -1,0 +1,645 @@
+<!--列表-->
+<ol class="breadcrumb" xmlns="http://www.w3.org/1999/html">
+    <li><a href="#">基本管理</a></li>
+    <li><a href="#">关键词回复</a></li>
+</ol>
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 列表&nbsp;&nbsp;
+            <span class="badge badge_diy">6</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="#add" id="add-tab" data-toggle="tab"> 新增 </a>
+    </li>
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">ID</th>
+                <th class="th_2x">情景类型</th>
+                <th >回复类型</th>
+                <th class="th_edit">编辑</th>
+                <th class="th_del">删除</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"keyWords"}}
+            <tr>
+                <th class="hidden-xs" scope="row">[[id]]</th>
+                <td>[[scene_type]]</td>
+                <td>[[reply_type]]</td>
+                <td>
+                    <button type="button" class="btn btn-primary _keyList_edit" data-keylist='{"id":"[[id]]","scene":"[[scene]]","reply":"[[reply]]"}' >编辑</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            {{/forList::"keyWords"}}
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共3页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        <li class="active"><a href="#">1</a></li>
+                        <li ><a href="#">2</a></li>
+                        <li ><a href="#">3</a></li>
+
+                        <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+    <div class="tab-pane fade" id="add">
+
+        <div class="form-horizontal">
+
+            <h5>互动情景</h5><hr/>
+
+            <div class="form-group">
+
+                <label for="a2" class="col-sm-2 control-label">情景类型</label>
+
+                <div class="col-sm-10 _scene_radio">
+                    <label class="radio-inline">
+                        <input type="radio" name="scene" id="scene1"> 被添加自动回复
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="scene" id="scene2"> 消息自动回复
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="scene" id="scene3"> 关键词自动回复
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-horizontal _replyType">
+
+            <hr/><h5>回复类型</h5><hr/>
+
+            <div class="form-group">
+                <label for="a2" class="col-sm-2 control-label">回复类型</label>
+
+                <div class="col-sm-10 _reply_radio" id="a2">
+                    <label class="radio-inline">
+                        <input type="radio" name="reply" id="reply1"> 文本
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="reply" id="reply2"> 图片
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="reply" id="reply3"> 语音
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="reply" id="reply4"> 视频
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="reply" id="reply5"> 图文
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-horizontal _keywords">
+
+            <hr/><h5>关键词设置</h5><hr/>
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">规则名</label>
+                <div class="col-sm-10">
+                    <input id="a1" type="text" class="form-control" placeholder="唯一规则名">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">关键词</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="关键词用 逗号 隔开">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">添加</button>
+                          </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="a1" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <p><span class="label label-success">关键字1</span>
+                        &nbsp;<input type="checkbox">全匹配
+                        &nbsp;<span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                    </p>
+                    <p><span class="label label-success">关键字2</span>
+                        &nbsp;<input type="checkbox">全匹配
+                        &nbsp;<span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-horizontal _txt">
+
+            <hr/><h5>文本回复</h5><hr/>
+
+            <div class="form-group">
+                <label for="a4" class="col-sm-2 control-label">文本</label>
+                <div class="col-sm-10">
+                    <textarea id="a4" type="text" class="form-control"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-horizontal _picture">
+
+            <hr/><h5>图片回复</h5><hr/>
+
+            <div class="form-group">
+                <label for="inputFile" class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-6">
+                    <p>
+                        <div style="float: left;"><input type="file" id="inputFile"></div>
+                        <button type="button" class="btn btn-xs btn-default">提交</button>
+                    </p>
+
+                    <p>
+                        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                        <span id="tips">上传文件不能大于400k,只支持jpg,png,gif</span>
+                    </p>
+
+                </div>
+                <div class="col-lg-4">
+                    <img src="./Public/images/pic200x200.jpg" alt="" class="img-thumbnail">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-horizontal _audio">
+
+            <hr/><h5>音频回复</h5><hr/>
+
+            <div class="form-group">
+                <label for="inputFile" class="col-sm-2 control-label">音频</label>
+                <div class="col-sm-5">
+                    <p>
+                    <div style="float: left;"><input type="file" id="inputFile"></div>
+                    <button type="button" class="btn btn-xs btn-default">提交</button>
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                        <span id="tips">上传文件不能大于400k,只支持mp3,amr</span>
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <p>
+                        <audio src="song.mp3" controls="controls" loop="loop" autoplay="autoplay">
+                            您的浏览器不支持html5的audio标签
+                        </audio>
+                    </p>
+                </div>
+            </div>
+
+            <hr/>
+
+        </div>
+
+
+        <div class="form-horizontal _video">
+
+            <hr/><h5>视频回复</h5><hr/>
+
+            <div class="form-group">
+                <label for="inputFile" class="col-sm-2 control-label">视频</label>
+                <div class="col-sm-5">
+                    <p>
+                    <div style="float: left;"><input type="file" id="inputFile"></div>
+                    <button type="button" class="btn btn-xs btn-default">提交</button>
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                        <span id="tips">上传文件不能大于400k,只支持mp3,amr</span>
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <p>
+                        <video src="song.mp4" controls="controls" loop="loop" autoplay="autoplay">
+                            您的浏览器不支持html5的audio标签
+                        </video>
+                    </p>
+                </div>
+            </div>
+
+            <hr/>
+
+        </div>
+
+
+        <div class="form-horizontal _picTxt">
+
+            <hr/><h5>图文回复</h5><hr/>
+
+            <div class="form-group">
+                <label for="inputFile" class="col-sm-2 control-label">图文</label>
+                <div class="col-sm-5">
+
+                </div>
+                <div class="col-lg-5">
+
+                </div>
+            </div>
+
+            <hr/>
+
+        </div>
+
+
+        <div class="panel-default text-center _send" style="margin-bottom: 0;" >
+            <div class="panel-body" >
+                <button type="button" class="btn btn-success chanel">取消</button>
+                <div class="padding"></div>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+
+    </div>
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+    <div class="form-horizontal">
+
+        <h5>互动情景</h5><hr/>
+
+        <div class="form-group">
+
+            <label for="a2" class="col-sm-2 control-label">情景类型</label>
+
+            <div class="col-sm-10 _scene_radio">
+                <label class="radio-inline">
+                    <input type="radio" name="scene" id="scene1"> 被添加自动回复
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="scene" id="scene2"> 消息自动回复
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="scene" id="scene3"> 关键词自动回复
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-horizontal _replyType">
+
+        <hr/><h5>回复类型</h5><hr/>
+
+        <div class="form-group">
+            <label for="a2" class="col-sm-2 control-label">回复类型</label>
+
+            <div class="col-sm-10 _reply_radio" id="a2">
+                <label class="radio-inline">
+                    <input type="radio" name="reply" id="reply1"> 文本
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="reply" id="reply2"> 图片
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="reply" id="reply3"> 语音
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="reply" id="reply4"> 视频
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="reply" id="reply5"> 图文
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-horizontal _keywords">
+
+        <hr/><h5>关键词设置</h5><hr/>
+        <div class="form-group has-feedback">
+            <label for="a1" class="col-sm-2 control-label">规则名</label>
+            <div class="col-sm-10">
+                <input id="a1" type="text" class="form-control" placeholder="唯一规则名">
+                <span class="glyphicon form-control-feedback"></span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label for="a1" class="col-sm-2 control-label">关键词</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="关键词用 逗号 隔开">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">添加</button>
+                          </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="a1" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <p><span class="label label-success">关键字1</span>
+                    &nbsp;<input type="checkbox">全匹配
+                    &nbsp;<span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                </p>
+                <p><span class="label label-success">关键字2</span>
+                    &nbsp;<input type="checkbox">全匹配
+                    &nbsp;<span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-horizontal _txt">
+
+        <hr/><h5>文本回复</h5><hr/>
+
+        <div class="form-group">
+            <label for="a4" class="col-sm-2 control-label">文本</label>
+            <div class="col-sm-10">
+                <textarea id="a4" type="text" class="form-control"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-horizontal _picture">
+
+        <hr/><h5>图片回复</h5><hr/>
+
+        <div class="form-group">
+            <label for="inputFile" class="col-sm-2 control-label">图片</label>
+            <div class="col-sm-6">
+                <p>
+                <div style="float: left;"><input type="file" id="inputFile"></div>
+                <button type="button" class="btn btn-xs btn-default">提交</button>
+                </p>
+
+                <p>
+                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                    <span id="tips">上传文件不能大于400k,只支持jpg,png,gif</span>
+                </p>
+
+            </div>
+            <div class="col-lg-4">
+                <img src="./Public/images/pic200x200.jpg" alt="" class="img-thumbnail">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-horizontal _audio">
+
+        <hr/><h5>音频回复</h5><hr/>
+
+        <div class="form-group">
+            <label for="inputFile" class="col-sm-2 control-label">音频</label>
+            <div class="col-sm-5">
+                <p>
+                <div style="float: left;"><input type="file" id="inputFile"></div>
+                <button type="button" class="btn btn-xs btn-default">提交</button>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                    <span id="tips">上传文件不能大于400k,只支持mp3,amr</span>
+                </p>
+            </div>
+            <div class="col-lg-5">
+                <p>
+                    <audio src="song.mp3" controls="controls" loop="loop" autoplay="autoplay">
+                        您的浏览器不支持html5的audio标签
+                    </audio>
+                </p>
+            </div>
+        </div>
+
+        <hr/>
+
+    </div>
+
+
+    <div class="form-horizontal _video">
+
+        <hr/><h5>视频回复</h5><hr/>
+
+        <div class="form-group">
+            <label for="inputFile" class="col-sm-2 control-label">视频</label>
+            <div class="col-sm-5">
+                <p>
+                <div style="float: left;"><input type="file" id="inputFile"></div>
+                <button type="button" class="btn btn-xs btn-default">提交</button>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                    <span id="tips">上传文件不能大于400k,只支持mp3,amr</span>
+                </p>
+            </div>
+            <div class="col-lg-5">
+                <p>
+                    <video src="song.mp4" controls="controls" loop="loop" autoplay="autoplay">
+                        您的浏览器不支持html5的audio标签
+                    </video>
+                </p>
+            </div>
+        </div>
+
+        <hr/>
+
+    </div>
+
+
+    <div class="form-horizontal _picTxt">
+
+        <hr/><h5>图文回复</h5><hr/>
+
+        <div class="form-group">
+            <label for="inputFile" class="col-sm-2 control-label">图文</label>
+            <div class="col-sm-5">
+
+            </div>
+            <div class="col-lg-5">
+
+            </div>
+        </div>
+
+        <hr/>
+
+    </div>
+
+
+    <div class="panel-default text-center _send" style="margin-bottom: 0;" >
+        <div class="panel-body" >
+            <button type="button" class="btn btn-success chanel">取消</button>
+            <div class="padding"></div>
+            <button type="button" class="btn btn-primary">提交</button>
+        </div>
+    </div>
+
+    </div>
+    <!--#编辑-->
+
+</div>
+
+<script>
+
+    /*标签切换*/
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();//隐藏提交按钮
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();//隐藏提交按钮
+    });
+
+
+    /*radio 选择面板处理*/
+    /*互动情景选择*/
+    $scene_radio=$("._scene_radio input[name='scene']");
+    $scene_radio.click(function(){
+        $scene_checked=$("._scene_radio input[name='scene']:checked");
+        switch($scene_checked.attr("id")){
+            case "scene1": console.log('scene1'); $("._keywords").hide(); break;
+            case "scene2": console.log("scene2"); $("._keywords").hide(); break;
+            case "scene3": console.log("scene3"); $("._keywords").fadeIn(); break;
+            default: break;
+        }
+
+        if( $scene_checked.attr("id")){ $("._replyType").fadeIn(); }
+
+    });
+
+    /*回复类型*/
+    $reply_radio=$("._reply_radio input[name='reply']");
+    $reply_radio.click(function(){
+        $reply_checked=$("._reply_radio input[name='reply']:checked");
+        switch($reply_checked.attr("id")){
+            case "reply1": console.log('reply1'); replyHide(); $("._txt").fadeIn(); break;
+            case "reply2": console.log("reply2"); replyHide(); $("._picture").fadeIn(); break;
+            case "reply3": console.log("reply3"); replyHide(); $("._audio").fadeIn(); break;
+            case "reply4": console.log("reply4"); replyHide(); $("._video").fadeIn(); break;
+            case "reply5": console.log("reply5"); replyHide(); $("._picTxt").fadeIn(); break;
+            default: break;
+        }
+
+        if($reply_checked.attr("id")){ $("._send").fadeIn(); }
+    });
+    function replyHide(){
+        $("._txt").hide(); $("._picture").hide(); $("._audio").hide(); $("._video").hide(); $("._picTxt").hide();
+    }
+
+
+    /*列表页点击动作*/
+
+    edit_data=new Object(); ed=edit_data; ed.id=''; ed.sence=''; ed.reply='';
+
+    $('._keyList_edit').on('click',function(){
+
+        ed.id=$(this).data("keylist").id; ed.sence=$(this).data("keylist").scene; ed.reply=$(this).data("keylist").reply;
+        console.log("id:"+ ed.id +"|scene:"+ ed.sence +"|reply:"+ ed.reply );//
+
+        $('#myTabs #edit-tab').show();//标签面板 标题显示
+        $('#myTabs a[href="#edit"]').tab('show');//标签面板 内容显示
+
+        //$("._scene_radio input[name='scene']:eq(0)").attr("checked","checked");
+
+        $("#scene1").attr("checked","checked");
+
+        switch(ed.sence){
+            case "1": console.log('scene1'); $("._keywords").hide(); break;
+            case "2": console.log("scene2"); $("._keywords").hide(); break;
+            case "3": console.log("scene3"); $("._keywords").fadeIn(); break;
+            default: break;
+        }
+
+        switch(ed.reply){
+            case "1": console.log('reply1'); replyHide(); $("._txt").fadeIn(); break;
+            case "2": console.log("reply2"); replyHide(); $("._picture").fadeIn(); break;
+            case "3": console.log("reply3"); replyHide(); $("._audio").fadeIn(); break;
+            case "4": console.log("reply4"); replyHide(); $("._video").fadeIn(); break;
+            case "5": console.log("reply5"); replyHide(); $("._picTxt").fadeIn(); break;
+            default: break;
+        }
+
+    });
+
+
+    $('button.chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+
+
+
+</script>

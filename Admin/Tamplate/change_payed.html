@@ -1,0 +1,216 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">订单管理</a></li>
+    <li><a href="#">消费记录</a></li>
+</ol>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="col-sm-2">
+            <input id="search_name" type="text" class="form-control" placeholder="消费者" >
+        </div>
+
+        <div class="col-sm-2">
+            <input id="search_order" type="text" class="form-control" placeholder="订单号" >
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='endTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_sta' class='form-control' placeholder='开始日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden' value='' />-->
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='staTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_end' class='form-control' placeholder='结束日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden'  value='' />-->
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-primary search">搜索</button>
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-success table_down">导出</button>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 消费记录&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">PID</th>
+                <th class="th_2x hidden-xs">订单号</th>
+                <th class="th_nomal ">消费者</th>
+                <th class="th_nomal hidden-xs">总价</th>
+                <th class="th_nomal ">补贴</th>
+                <th class="th_nomal ">实付</th>
+                <th class="th_nomal">收银员</th>
+                <th class="hidden-xs">消费时间</th>
+                <th class="hidden-xs">ip</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"payed"}}
+            <tr>
+                <th class="hidden-xs" id="[[payed_id]]" scope="row">[[payed_id]]</th>
+                <td class="hidden-xs" >[[order_no]]</td>
+                <td>[[uid]]</td>
+                <td>[[total_money]]</td>
+                <td class="hidden-xs">[[total_benefit]]</td>
+                <td>[[people_money]]</td>
+                <td>[[cid]]</td>
+                <td class="hidden-xs">[[time]]</td>
+                <td class="hidden-xs">[[ip]]</td>
+
+            </tr>
+            {{/forList::"payed"}}
+            <tr><td colspan="9" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_url]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+
+    <!--#编辑-->
+
+</div>
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+    $('#myTabs #edit-tab').hide();
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+    $('button.edit').click(function(){
+        $aid=$(this).parent().parent().find('th').text();
+        if($aid!=''){
+            $('#myTabs #edit-tab').show();
+            $('#myTabs a[href="#edit"]').tab('show');
+            //alert( 'aid:'+$aid );
+        }
+    });
+    $('button.chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+
+    ////搜索
+    $name=$('#search_name');
+    $order=$('#search_order');
+    $sta=$('#search_sta');
+    $end=$('#search_end');
+    $(document).ready(function(){
+        $('#search_name').val( pathReq('name') );
+        $('#search_order').val( pathReq('order') );
+        $('#search_sta').val( pathReq('sta') );
+        $('#search_end').val( pathReq('end') );
+    });
+    function searchInput(){
+        $name_v=$name.val();
+        $order_v=$order.val();
+        $sta_v=$sta.val();
+        $end_v=$end.val();
+        $uri='';
+        if($name_v){ $uri+="/name-"+$name_v; }
+        if($order_v){ $uri+="/order-"+$order_v; }
+        if($sta_v){ $uri+="/sta-"+$sta_v; }
+        if($end_v){ $uri+="/end-"+$end_v; }
+        return $uri;
+    }
+    $('button.search').bind('click',function(){
+        $uri=searchInput();
+        window.location.href='{{base_url}}'+$uri;
+    });
+    //\\
+
+    ////导出表格
+    $('button.table_down').bind('click',function(){
+        $uri=searchInput();
+        if($sta.val()==''||$end.val()==''){ modalbox('日期信息不全！',1);  return false ; }
+        window.open('{{base_url}}'+$uri+'/table-1/');
+    });
+    //\\
+
+
+
+</script>

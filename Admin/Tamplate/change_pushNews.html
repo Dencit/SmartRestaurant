@@ -1,0 +1,244 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">微信管理</a></li>
+    <li><a href="#">菜品推送</a></li>
+</ol>
+
+
+<div class="panel panel-default">
+
+    <div class="panel-body">
+
+        <h4 class="pull-left">推送在售菜品</h4>
+        <h5 style="color:#888;">
+            <span class="glyphicon glyphicon-info-sign">上架的菜品都在这里,非上架的菜品自动隐藏。</span>
+        </h5>
+
+        <hr/>
+
+        <div class="form-horizontal" id="push_news">
+
+                <div class="form-group">
+
+                    <div class="col-sm-6">
+                        <select class="form-control _type">
+                            <option value="1" selected>早餐</option>
+                            <option value="2">午餐</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6" >
+                        <div class='input-group date form_date'
+                             data-date='' data-date-format='yyyy-mm-dd' data-link-field='endTime' data-link-format='yyyy-mm-dd'>
+                            <input id='search_sta' class='form-control _date' placeholder='预定日期' size='16' type='text' value='' readonly>
+                            <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+                        </div>
+                        <!--<input type='hidden' value='' />-->
+                    </div>
+
+                </div>
+
+
+                <!--<div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control _title" placeholder="标题"/>
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea class="form-control _desc" placeholder="补充说明文本" ></textarea>
+                        <span class="glyphicon form-control-feedback"></span>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                    <div class="col-sm-12" >
+                        <input type="text" class="form-control _link" value="http://smrt.host.com/Home/?/info/news/" readonly >
+                    </div>
+                </div>-->
+
+                <div class="form-group ">
+                    <div class="col-sm-1" >
+                        <button type="submit" class="btn btn-primary _push_btn" >推送</button>
+                    </div>
+                </div>
+
+                <div class="panel-default text-center" style="margin-bottom: 0;">
+
+                </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 在售菜品 &nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+
+
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">FID</th>
+                <th class="th_nomal hidden-xs">图片</th>
+                <th class="th_2x">品名</th>
+                <th class="th_nomal hidden-xs">类型</th>
+                <th class="th_nomal">单价</th>
+                <th class="th_nomal hidden-xs">库存</th>
+                <th class="th_nomal hidden-xs">销量</th>
+                <th class="th_nomal hidden-xs">状态</th>
+
+                <th class="th_del">下架</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"pushNews"}}
+            <tr>
+                <th class="hidden-xs" id="[[food_id]]" scope="row">[[food_id]]</th>
+                <td class="hidden-xs"><img height="60" src="/Upload/food/[[image]]" alt="[[image]]" class="img-rounded"/> </td>
+                <td>[[name]]</td>
+                <td class="hidden-xs">[[type_name]]</td>
+                <td>[[price]]</td>
+                <td class="hidden-xs">[[stock]]</td>
+                <td class="hidden-xs">[[sales]]</td>
+                <td class="hidden-xs">[[allow]]</td>
+
+                <td>
+                    <button type="button" class="btn btn-danger down">下架</button>
+                </td>
+            </tr>
+            {{/forList::"pushNews"}}
+            <tr><td colspan="9" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="?/weixin/pushNews/p-{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="?/weixin/pushNews/p-[[page_num]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="?/weixin/pushNews/p-{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+
+    <!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////推送动作
+
+    $('._push_btn').click(function(){
+
+        $push_selector='#push_news';
+        $push_child='date/._date/val,type/._type/opt,desc/._desc/val,';
+        $filter='';
+        $push_data=ajax.submitData($push_selector,$push_child,$filter);
+        console.log($push_data);//
+
+
+        if($push_data.date==''){ alert('请输入日期！'); return false; }
+
+        //return false;//
+        ajax.post('?/weixin/pushNews_ax/',$push_data,function(result){
+            ajax.msgbox(result,1);
+        });
+
+
+    });
+
+    //\\
+
+
+
+
+    ////删除动作
+    $('button.down').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowId );//
+        $data={};$data.rowId=$rowId;
+
+
+        ajax.post('?/weixin/pushNews_down_ax',$data,function(result){
+
+            var $food_id='#'+result.data.food_id;
+            $($food_id).parent().hide();
+
+            //ajax.msgbox(result);
+        });
+
+    });
+    //\\
+
+
+
+</script>

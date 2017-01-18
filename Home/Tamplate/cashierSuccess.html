@@ -1,0 +1,50 @@
+{{include::"include_head"}}
+
+        
+<section class="page paySuccess  page_header">
+    <div class="paySuccess">
+        <p class="paySuccess_h">{{title}}</p>
+        <span class="icon-tick"></span>
+        <p class="paySumCn">总共消费</p>
+        <span class="payPrice"><span class="price_h">￥</span>{{total_money}}<span class="price_end"></span></span>
+        <p class="payDetails">其中个人消费<span>{{people_money}}</span>元，补助消费<span>{{total_benefit}}</span>元</p>
+
+      <!--  <p class="paySuccess_ask">是否继续扫码？</p>
+        <a class="js-qr" href="javascript:window.location.replace('?/payment/cashier');">是，继续扫码</a>
+        <a href="javascript:window.location.replace('?/info/news');">否，返回下单</a>
+-->
+    </div>
+</section>
+
+
+
+<script>
+
+    $(".js-qr").bind('click',function(){
+
+        wx.scanQRCode({
+            desc: 'scanQRCode desc',
+            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+            success: function (res) {
+                // 回调
+            },
+            error: function(res){
+                if(res.errMsg.indexOf('function_not_exist') > 0){
+                    alert('版本过低请升级')
+                }
+            }
+        });
+
+
+
+    })
+
+
+
+</script>
+
+
+
+
+{{include::"include_foot"}}

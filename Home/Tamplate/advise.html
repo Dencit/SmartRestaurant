@@ -1,0 +1,175 @@
+{{include::"include_head"}}
+
+<section class="page page_footer page_header">
+    <div class="adviseTop">
+        <div class="newsConTop clearfix">
+            <p class="fl">{{date}}</p>
+            <p class="fr">{{weekday}}</p>
+        </div>
+        <div class="foodList swiper-container">
+            <ul class="swiper-wrapper">
+
+                {{folist::"food_list"}}
+                <li class="swiper-slide">
+                    <a href="#"><img src="/Upload/food/[[image]]" alt="[[name]]"></a>
+                </li>
+                {{/folist::"food_list"}}
+
+            </ul>
+        </div>
+    </div>
+    <div class="advisePanel">
+        <form class="js_rated" action='javascript:rated();'>
+            <div class="advisePanelTop clearfix">
+                <p class="advisePanelTop_l fl">给我们打个分吧</p>
+                <p class="advisePanelTop_r fr">您的支持是我们最大的动力！</p>
+            </div>
+            <div class="advisePaneList">
+                <ul >
+                    <li>
+                        <p class="advisePaneList_h"><label class="advisePaneList_h">饭菜质量</label></p>
+                        <label class="advisePaneList_p">
+                            好评
+                            <input type="radio" name="foodQu" value="A" class="hidden_radio" checked="checked"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            良好
+                            <input type="radio" name="foodQu" value="B" class="hidden_radio" />
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            一般
+                            <input type="radio" name="foodQu" value="C" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            差评
+                            <input type="radio" name="foodQu" value="D" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+
+                        <span class="icon-positive fr"></span>
+                    </li>
+                    <li>
+                        <p class="advisePaneList_h"><label class="advisePaneList_h">服务质量</label></p>
+                        <label class="advisePaneList_p">
+                            好评
+                            <input type="radio" name="serveQu" value="A" class="hidden_radio" checked="checked"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            良好
+                            <input type="radio" name="serveQu" value="B" class="hidden_radio" />
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            一般
+                            <input type="radio" name="serveQu" value="C" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            差评
+                            <input type="radio" name="serveQu" value="D" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <span class="icon-positive fr"></span>
+                    </li>
+                    <li>
+                        <p class="advisePaneList_h"><label class="advisePaneList_h">餐厅环境</label></p>
+                        <label class="advisePaneList_p">
+                            好评
+                            <input type="radio" name="environmentQu" value="A"  class="hidden_radio" checked="checked"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            良好
+                            <input type="radio" name="environmentQu" value="B" class="hidden_radio" />
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            一般
+                            <input type="radio" name="environmentQu" value="C" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+                        <label class="advisePaneList_p">
+                            差评
+                            <input type="radio" name="environmentQu" value="D" class="hidden_radio"/>
+                            <span class="radio_btn icon-select"></span>
+                        </label>
+
+                        <span class="icon-positive fr"></span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="advisePanelTop clearfix">
+                <p class="advisePanelTop_l fl">说点啥</p>
+                <p class="advisePanelTop_r fr">请留下您的宝贵意见！</p>
+            </div>
+
+            <textarea name="advise_info" maxlength="140"
+                      onchange="this.value=this.value.substring(0, 140)"
+                      onkeydown="this.value=this.value.substring(0, 140)"
+                      onkeyup="this.value=this.value.substring(0, 140)">
+            </textarea>
+
+            <div class="QuSubmit"><input type="submit" value="提交评论" /></div>
+
+
+        </form>
+
+
+    </div>
+
+</section>
+
+{{include::"include_nav"}}
+
+<script>
+
+    function rated(){
+        ajax.formPost($('.js_rated'),'?/account/advise_ax',function(result){
+
+            ajax.msgbox(result,2);
+
+        });
+    }
+
+    $(function(){
+
+        var foodListSwiper = new Swiper ('.foodList', {
+            autoplay : 3000,
+            autoplayDisableOnInteraction : false,
+            loop: true,
+            slidesPerView:4,
+            spaceBetween:15
+        });
+
+        var advisePaneListLi=$('.advisePaneList>ul>li');
+        advisePaneListLi.each(function(index){
+
+            advisePaneListLi.eq(index).children('.advisePaneList_p').each(function(indexLabel){
+                $(this).on('click',function(){
+                    if(indexLabel==0){
+                        advisePaneListLi.eq(index).children('span').removeClass('icon-credit').removeClass('icon-moderate').removeClass('icon-negative').addClass('icon-positive');
+                    }
+                    else if(indexLabel==1){
+                        advisePaneListLi.eq(index).children('span').removeClass('icon-positive').removeClass('icon-moderate').removeClass('icon-negative').addClass('icon-credit');
+                    }
+                    else if(indexLabel==2){
+                        advisePaneListLi.eq(index).children('span').removeClass('icon-credit').removeClass('icon-positive').removeClass('icon-negative').addClass('icon-moderate');
+                    }
+                    else if(indexLabel==3){
+                        advisePaneListLi.eq(index).children('span').removeClass('icon-credit').removeClass('icon-moderate').removeClass('icon-positive').addClass('icon-negative');
+                    }
+                })
+            })
+        })
+
+    })
+</script>
+
+
+{{include::"include_foot"}}

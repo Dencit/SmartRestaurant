@@ -1,0 +1,13 @@
+User-agent: *
+Disallow:/
+Disallow:/.idea
+
+Disallow:/Admin
+Disallow:/Cache
+Disallow:/Common
+Disallow:/Home
+Disallow:/Library
+Disallow:/weixin_api
+
+
+

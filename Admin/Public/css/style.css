@@ -1,0 +1,64 @@
+/*design bootstrap*/
+.badge_diy{line-height: 10px;}
+
+.tab-content{ border:1px solid #ddd; border-top:0; padding: 2rem; }
+
+.table>tbody>tr>th ,.table>tbody>tr>td ,.table >thead>tr>th{ line-height: 3rem; }
+
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{max-height: inherit;}/*修改悬浮导航的最大高度*/
+
+.pagination > li > a{float:none}/*处理翻页箭头按钮 上下边距异常*/
+
+.glyphicon-info-sign::before{vertical-align: middle;padding: 0 .5rem 0 2rem;}/*字体提示图标 上下居中*/
+
+
+
+.panel_link{ position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; background-color: #f3f3f3; }
+
+.panel_link_title:first-child{border-top-right-radius: 4px; border-top-left-radius: 4px;}
+.panel_link_group:last-child{border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; overflow: hidden;}
+
+.panel_link_title{z-index: 2;position: relative; display: block; padding: 10px 15px; color: #fff; background-color: #337ab7;}
+
+.panel_link_title .caret{margin: 0 1rem;}
+
+.panel_link_group{padding: 0;}
+
+a.panel_link{ color: #555; }
+.panel_link.active{ color: #337AB7; text-decoration: none; background-color: #d3f5ff; }
+.panel_link:hover{ color: #337AB7; text-decoration: none; }
+.panel_link.disabled{color: #fff; cursor: not-allowed; background-color: #ddd;}
+
+
+
+/*#design bootstrap*/
+
+/*common*/
+.padding{ display: inline; padding: 0 1rem; }
+
+.th_nomal{width:6rem;}
+.th_2x{width:12rem;}
+.th_3x{width:18rem;}
+.th_edit,.th_del{ width: 6rem; }
+
+._txt,._keywords,._picture,._audio,._video,._picTxt{display:none;}/*新增和编辑共有*/
+._replyType,._send{display:none;}
+._active{color: #337ab7; text-decoration: none; background-color: #f5f5f5;}
+
+.footer {
+    width: 100%; position: fixed; bottom: 0;
+    border-top: 1px solid #E5E5E5; background-color: #f8f8f8;
+    text-align:center; color: #767676;
+    padding: 1rem 0; margin-top: 100px;
+    z-index: 9;
+}
+.footer p{ margin: 0; }
+
+
+
+/*#common*/
+
+
+
+
+

@@ -1,0 +1,16 @@
+{{include::"include_head"}}
+
+<section class="page paySuccess  page_header">
+    <div class="paySuccess">
+        <p class="paySuccess_h">{{title}}</p>
+        <span class="icon-tick"></span>
+        <p class="paySumCn">总共结账</p>
+        <span class="payPrice"><span class="price_h">￥</span>{{total_money}}<span class="price_end"></span></span>
+        <p class="payDetails">其中个人消费<span>{{people_money}}</span>元，补助消费<span>{{total_benefit}}</span>元</p>
+        <p class="paySuccess_ask">是否跳到个人信息？</p>
+        <a href="javascript:window.location.replace('?/account/perInfo');">是，立即跳转</a>
+        <a href="javascript:window.location.replace('?/info/news');">否，返回下单</a>
+    </div>
+</section>
+
+{{include::"include_foot"}}

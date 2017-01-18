@@ -1,0 +1,526 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">菜品管理</a></li>
+    <li><a href="#">菜品</a></li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group has-feedback">
+            <div class="col-sm-2">
+                <input id="search_name" type="text" class="form-control" placeholder="品名" >
+                <span class="glyphicon form-control-feedback"></span>
+            </div>
+            <div class="col-sm-2">
+                <select id="search_type" class="form-control">
+                    <option selected value="">类型</option>
+                    <option value="a1">早餐</option>
+                    <option value="p1">抓饭</option>
+                    <option value="p2">拌饭</option>
+                    <option value="p3">商务简餐</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <select id="search_allow" class="form-control">
+                    <option selected value="">状态</option>
+                    <option value="0">下架</option>
+                    <option value="1">上架</option>
+                </select>
+            </div>
+
+            <div class="col-sm-1" >
+                <button class="btn btn-primary search">搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 菜品&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#add" id="add-tab" data-toggle="tab"> 新增 </a>
+    </li>
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">FID</th>
+                <th class="th_nomal hidden-xs">图片</th>
+                <th class="th_2x">品名</th>
+                <th class="th_nomal hidden-xs">类型</th>
+                <th class="th_nomal">单价</th>
+                <th class="th_nomal hidden-xs">库存</th>
+                <th class="th_nomal hidden-xs">销量</th>
+                <th class="th_nomal hidden-xs">状态</th>
+
+                <th class="th_edit">编辑</th>
+                <th class="th_del">删除</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"foods"}}
+            <tr>
+                <th class="hidden-xs" id="[[food_id]]" scope="row">[[food_id]]</th>
+                <td class="hidden-xs"><img height="60" src="/Upload/food/[[image]]" alt="[[image]]" class="img-rounded"/> </td>
+                <td>[[name]]</td>
+                <td class="hidden-xs">[[type]]</td>
+                <td>[[price]]</td>
+                <td class="hidden-xs">[[stock]]</td>
+                <td class="hidden-xs">[[sales]]</td>
+                <td class="hidden-xs">[[allow]]</td>
+                <td>
+                    <button type="button" class="btn btn-primary edit">编辑</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger del">删除</button>
+                </td>
+            </tr>
+            {{/forList::"foods"}}
+            <tr><td colspan="10" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_url]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+    <div class="tab-pane fade" id="add">
+
+        <div class="form-horizontal">
+
+            <div id="img_add" class="form-group">
+
+
+                <label class="col-sm-2 panel-body control-label ">图片</label>
+
+                <div class="col-sm-2 panel-body">
+                    <img src="/Upload/food/noneImg.jpg" width="100%" class="img-thumbnail image_url">
+                </div>
+
+                <div class="col-sm-8 panel-body">
+
+                    <p class="form-inline col-sm-12">
+                        <input type="text" class="form-control text-right" value="/Upload/food/" style="width: 24%;" readonly>
+                        <input type="text" class="form-control image" value="noneImg.jpg" style="width: 76%;" >
+                        <input type="hidden" class="img_id" value="0">
+                    </p>
+
+                    <p class="col-sm-12">
+                        <input type="file" class="file" style="width: 100%; margin-top: 6px;">
+                    </p>
+                    <p class="col-sm-12">
+                        <button type="submit" class="btn btn-primary upload">上传图片</button>
+                        <span class="glyphicon glyphicon-info-sign" style="color:#888;">请上传文件小于2m，后缀为jpg、png、gif、bmp的图片。</span>
+                    </p>
+                </div>
+
+
+
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">品名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control name" placeholder="文本">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control type">
+                        <option value="a1">早餐</option>
+                        <option value="p1">抓饭</option>
+                        <option value="p2">拌饭</option>
+                        <option value="p3">商务简餐</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">单价</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control price" value="0.00" placeholder="0.00">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control stock" value="0" placeholder="0">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">销量</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control sales" value="0" placeholder="0">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                    <select class="form-control allow">
+                        <option value="0">下架</option>
+                        <option value="1">上架</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success add_chanel">取消</button>
+                    <div class="padding"></div>
+                    <button type="submit" class="btn btn-primary add_submit">提交</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">FID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control food_id" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group ">
+
+                <div id="img_edit" class="form-group">
+
+                    <label class="col-sm-2 panel-body control-label ">图片</label>
+
+                    <div class="col-sm-2 panel-body">
+                        <img src="/Upload/food/noneImg.jpg" width="100%" class="img-thumbnail image_url">
+                    </div>
+
+                    <div class="col-sm-8 panel-body">
+
+                        <p class="form-inline col-sm-12">
+                            <input type="text" class="form-control text-right" value="/Upload/food/" style="width: 24%;" readonly>
+                            <input type="text" class="form-control image" value="noneImg.jpg" style="width: 76%;" >
+                            <input type="hidden" class="img_id">
+                        </p>
+
+                        <p class="col-sm-12">
+                            <input type="file" class="file" style="width: 100%; margin-top: 6px;">
+                        </p>
+                        <p class="col-sm-12">
+                            <button type="submit" class="btn btn-primary upload">上传图片</button>
+                            <span class="glyphicon glyphicon-info-sign" style="color:#888;">请上传文件小于2m，后缀为jpg、png、gif、bmp的图片。</span>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">品名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control name" >
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select class="form-control type">
+                        <option value="a1">早餐</option>
+                        <option value="p1">抓饭</option>
+                        <option value="p2">拌饭</option>
+                        <option value="p3">商务简餐</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">单价</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control price">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control stock">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">销量</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control sales">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                    <select class="form-control allow">
+                        <option value="0">下架</option>
+                        <option value="1">上架</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success edit_chanel">取消</button>
+                    <div class="padding"></div>
+                    <button type="submit" class="btn btn-primary edit_submit">提交</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+    ////搜索动作
+    $(document).ready(function(){
+        $('#search_name').val( pathReq('name') );
+        $type=pathReq('type');
+        if($type){
+            $('#search_type option[value='+$type+']').prop('selected',true);
+        }
+        $allow=pathReq('allow');
+        if($allow){
+            $('#search_allow option[value='+$allow+']').prop('selected',true);
+        }
+    });
+    $('button.search').bind('click',function(){
+        $name=$('#search_name').val();
+        $type=$('#search_type option:selected').val();
+        $allow=$('#search_allow').val();
+
+        $uri='';
+        if($name){ $uri+="/name-"+$name; }
+        if($type){ $uri+="/type-"+$type; }
+        if($allow){ $uri+="/allow-"+$allow; }
+
+        window.location.href='{{base_url}}'+$uri;
+
+    });
+    //\\
+
+
+    ////编辑提交动作
+    $edit_selector='#edit';
+    $edit_child='food_id/.food_id/val,image/.image/val,img_id/.img_id/val,image_url/.image_url/src,name/.name/val,' +
+    'type/.type/opt,price/.price/val,stock/.stock/val,sales/.sales/val,allow/.allow/opt';
+    $filter='.image_url';
+
+    $('button.edit').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowid );//
+        if($rowId!=''){
+            $data={};$data.rowId=$rowId;
+            ajax.post('?/food/foods_edit_ax',$data,function(result){
+                //console.log(result);//
+                $data_get=result.data;
+                ajax.setResult($edit_selector,$edit_child,$data_get);
+                $('#myTabs #edit-tab').show();
+                $('#myTabs a[href="#edit"]').tab('show');
+            });
+        }
+    });
+
+    $('button.edit_chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+    $('button.edit_submit').click(function(){
+        $submitData=ajax.submitData($edit_selector,$edit_child,$filter);
+        //console.log($submitData);return false;//
+        ajax.post('?/food/foods_submit_ax',$submitData,function(result){
+            ajax.msgbox(result,1);
+        });
+    });
+    //\\
+
+    ////删除动作
+    $('button.del').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowId );//
+        $data={};$data.rowId=$rowId;
+
+
+        ajax.post('?/food/foods_del_ax',$data,function(result){
+
+            ajax.msgbox(result,1);
+
+            if(result.errcode==0){
+                var $food_id='#'+result.data.food_id;
+                $($food_id).parent().hide();
+            }
+
+        });
+
+    });
+    //\\
+
+    ////新增动作
+    $('button.add_chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+    $('button.add_submit').click(function(){
+        $add_child=$edit_child;
+        $filter='.food_id,.image_url';
+        $submitData=ajax.submitData('#add',$add_child,$filter);
+        //console.log($submitData);return false;//
+        ajax.post('?/food/foods_add_ax',$submitData,function(result){
+            ajax.msgbox(result,1);
+        });
+
+    });
+    //\\
+
+////上传图片
+
+    $(".file").change(function(){
+        var $file_list=$(this).prop('files');console.log( $(this) );//
+        var $file_desc=$file_list[0]; //console.log( $file_desc );//
+        var objUrl=ajax.getObjectURL($file_desc);console.log( objUrl );//
+        if (objUrl) {
+            $(".image_url").attr("src", objUrl) ;
+        }
+    });
+
+    //新增板块
+        $('#img_add .upload').click(function(){
+
+            ajax.imgUpload('#img_add .file','2',function($fileString){
+
+                $data={}; $data.file=$fileString; //console.log($data);return false;//
+
+                ajax.post('?/food/foods_img_ax/act-1/',$data,function(result){
+
+                    $data_get=result.data;
+                    ajax.setResult('#img_add','image/.image/val,image_url/.image_url/src,img_id/.img_id/val',$data_get);
+
+                });
+
+            });
+
+        });
+
+    //编辑板块
+        $('#img_edit .upload').click(function(){
+
+
+            ajax.imgUpload('#img_edit .file','2',function($fileString){
+
+                $data={}; $data.file=$fileString; //console.log($data);return false;//
+
+                ajax.post('?/food/foods_img_ax/act-2/',$data,function(result){
+
+                    $data_get=result.data;
+                    ajax.setResult('#img_edit','image/.image/val,image_url/.image_url/src,img_id/.img_id/val',$data_get);
+
+                });
+
+            });
+
+        });
+
+//\\
+
+</script>

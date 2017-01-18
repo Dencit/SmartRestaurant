@@ -1,0 +1,87 @@
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 扫码枪 &nbsp;&nbsp;
+
+        </a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <div class="form-horizontal ">
+
+            <div class="form-group" style="margin:100px 0;">
+
+                <div class="col-sm-10">
+                    <input class="form-control _scan_link" placeholder="订单号"/>
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" class="btn btn-success _scan_btn" value="提交">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////扫码动作
+    function callPost(){
+        $data={};
+        $data.order_no=$scan_link.val();
+        /*if( /http:\/\//.test($val)==false ){
+         $('#g_modal .modal-body').text('链接不对，请从新扫码！');
+         $('#g_modal').modal('toggle');
+         return false;
+         }*/
+        ajax.post('/Home/?/payment/cashier_ax/',$data,function(result){
+
+            if(result.errcode==0){
+                ajax.msgbox(result,1);
+                setTimeout(function(){ $('#g_modal').modal('hide'); },'2000');
+                $scan_link.val('');
+                return false;
+            }
+            ajax.msgbox(result,1);
+            setTimeout(function(){ $('#g_modal').modal('hide'); },'2000');
+        });
+    }
+    $(document).ready(function(){
+        $scan_link=$('._scan_link');$scan_btn= $('._scan_btn');
+        $scan_link.focus();
+        $scan_btn.bind('click',function(){
+            callPost();
+        });
+
+    });
+    $(document).keypress(function(event){
+         var keycode = (event.keyCode ? event.keyCode : event.which);
+         if(keycode == '13'){
+             callPost();
+         }
+    });
+    //\\
+
+
+</script>

@@ -1,0 +1,157 @@
+{{include::"include_head"}}
+{{include::"include_nav"}}
+
+<p style="height: 5rem"></p>
+
+<div class='container'>
+    <div class='row' >
+
+        <div class="col-md-2 hidden-xs">
+
+
+                <div class="panel_link_title" data-value="" >
+                    基本管理 <span class="caret"></span>
+                </div>
+
+                <div class="panel_link_group ">
+
+                    <a href="?/base/admin" class="panel_link _menu_link">管理员</a>
+                    <a href="?/base/member" class="panel_link _menu_link">会员</a>
+                    <a href="?/base/cashier" class="panel_link _menu_link">收银员</a>
+                    <a href="?/base/system" class="panel_link _menu_link">系统日志</a>
+
+                </div>
+
+
+                <div class="panel_link_title">
+                    微信管理 <span class="caret"></span>
+                </div>
+
+                <div class="panel_link_group">
+                    <a href="?/weixin/pushNews" class="panel_link _menu_link ">菜品推送</a>
+                    <a href="https://qy.weixin.qq.com/cgi-bin/home" class="panel_link _menu_link " target="_blank" >企业号后台</a>
+                    <a href="https://pay.weixin.qq.com/index.php/core/info" class="panel_link _menu_link " target="_blank" >企业号支付</a>
+
+                    <!--<a href="?/weixin/keyWords" class="list-group-item _menu_link" >关键词回复</a>
+                    <a href="?/weixin/menu" class="list-group-item _menu_link" >自定义菜单</a>-->
+                </div>
+
+
+                <div class="panel_link_title">
+                    菜品管理 <span class="caret"></span>
+                </div>
+                <div class="panel_link_group">
+                    <a href="?/food/foods" class="panel_link _menu_link">菜品</a>
+                    <a href="?/food/orders" class="panel_link _menu_link">售出记录</a>
+                </div>
+
+
+                <div class="panel_link_title">
+                    评论管理 <span class="caret"></span>
+                </div>
+                <div class="panel_link_group">
+                    <a href="?/rated/rateds" class="panel_link _menu_link">评论</a>
+                </div>
+
+                <div class="panel_link_title">
+                    订单管理 <span class="caret"></span>
+                </div>
+                <div class="panel_link_group">
+                    <a href="?/book/books" class="panel_link _menu_link">预订</a>
+                    <a href="?/book/payed" class="panel_link _menu_link">消费记录</a>
+                    <a href="?/book/scangun" class="panel_link _menu_link">扫码枪</a>
+                </div>
+
+
+                <div class="panel_link_title">
+                    充值管理 <span class="caret"></span>
+                </div>
+                <div class="panel_link_group">
+                    <a href="?/recharge/account" class="panel_link _menu_link">充值</a>
+                    <a href="?/recharge/recharges" class="panel_link _menu_link">充值记录</a>
+                </div>
+
+
+        </div>
+
+
+        <script>
+
+            function aj_close(){
+                ajax.post("/Admin/?/login/out",{},function(result){
+                    ajax.msgbox(result);
+                });
+            }
+
+            $('.log_out').bind('click',function(){  aj_close();  });
+
+
+            $menu_title=$('.panel_link_title');
+            $menu_group=$('.panel_link_group');
+            $menu_link=$('._menu_link');
+
+            $menu_group.hide();
+
+            //
+            $local_uri=uri_get('?',1);
+            console.log( $local_uri[0].split("/")[2] );//
+            $menu_link.each(function(index){
+
+                $url=$menu_link.eq(index).attr('href');
+                $menu_uri=uri_get('?',1,$url);
+                console.log( $menu_uri[0].split("/")[2] );//
+
+                $menu_link.eq(index).parent().prev().data('value',1);
+
+                //console.log( equal_arr($menu_uri,$local_uri) );//
+                if($local_uri[0].split("/")[2] ==  $menu_uri[0].split("/")[2] ){
+
+                    //$menu_link.eq(index).parents().hide();
+
+                    $menu_group.hide();
+                    //$menu_title.data('value',0);
+
+                    $menu_link.eq(index).addClass('active');
+
+                    $(this).parent().prev().data('value',0);
+                    console.log( $(this).parent().prev().data('value') );//
+
+                    $menu_link.eq(index).parent().show();
+                }
+
+            });
+
+
+            //
+            $menu_title.each(function(ind){
+
+
+                $menu_title.eq(ind).bind('click',function(){
+
+                    $eqindex=$menu_group.eq(ind);
+
+                    if($(this).data('value')==undefined){$eqindex.slideDown('slow'); $(this).data('value',0);return false;}
+                    if($(this).data('value')==0){ $eqindex.slideUp('slow'); $(this).data('value',1); return false;}
+                    if($(this).data('value')==1){ $eqindex.slideDown('slow'); $(this).data('value',0); return false;}
+
+                });
+
+
+            });
+
+
+
+        </script>
+
+
+        <div class="col-md-10">
+
+            {{change::"content"}}
+
+        </div>
+
+    </div>
+</div>
+
+<p style="height: 4rem"></p>
+{{include::"include_foot"}}

@@ -1,0 +1,39 @@
+/*common*/
+
+* {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+html{-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; font-size: 62.5%;}
+body{font-family: "Microsoft Yahei",Helvetica, Arial, sans-serif,"iconfont"  !important; font-size: 1.4rem; color:#333; background:#f0f0f0;}
+body, button, input, optgroup, select, textarea, h1, h2, h3, h4, h5, h6, p, figure, form, blockquote, ul, ol, li, dl, dd{margin:0;padding:0}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary{display: block;}
+input[type="button"], input[type="submit"], input[type="reset"]{-webkit-appearance:none;}
+img{vertical-align:middle; max-width:100%; border:0;}
+ul,ol{list-style:none;}
+input,textarea,select{outline:none; font-size:100%;}
+a{color:#333; text-decoration: none; -webkit-tap-highlight-color: rgba(0,0,0,0);}
+.table{border-collapse:collapse; border-spacing:0;}
+.clear{clear:both; height:0; overflow:hidden;}
+.clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden;}
+.ui-hidden{display:none;}
+.ui-block{display:block;}
+.fl{float:left;}
+.fr{float:right;}
+html,body{height:99.9%; min-height:100%; position:relative;}
+.page{width:100%; min-height:100%; position:absolute; top:0; left:0; overflow-x:hidden;}
+.page_header{/*padding-top:44px;*/}
+.page_footer{padding-bottom: 49px;}
+.page_header_footer{padding: 44px 0 49px 0;}
+.page_full{width:100%; height: 100%; position:absolute; top:0; left:0; overflow:hidden;}
+.ui-grid-a,.ui-grid-b,.ui-grid-c,{overflow: hidden;}
+.ui-grid-a>.ui-block-a,.ui-grid-a>.ui-block-b{width: 50%;}
+.ui-grid-b>.ui-block-a,.ui-grid-b>.ui-block-b,.ui-grid-b>.ui-block-c{width: 33.333%;}
+.ui-block-a,.ui-block-b,.ui-block-c{float: left;margin: 0;padding: 0;border: 0;min-height: 1px;box-sizing: border-box;}
+
+
+/*模态窗*/
+.modal_bg{display:none;background-color: rgba(0,0,0,0.6);position:fixed;z-index:99;width: 100%;height: 100%;top: 0;left: 0;}
+.modal{background-color: #fff;width: 70%;position: absolute;height: 125px;border-radius: 7px;top: 50%;left: 50%;margin: -62.5px 0 0 -35%;text-align: center;}
+.modal_content{font-size: 2rem;padding: 40px 0 20.5px 0;color: #282828;}
+.modal_ok{border-top:2px solid #eaeaea;line-height: 35.5px;font-size: 1.6rem;color: #666666;}
+/*#模态窗*/
+
+/*#common*/

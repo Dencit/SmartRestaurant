@@ -1,0 +1,291 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">基本管理</a></li>
+    <li><a href="#">收银员</a></li>
+</ol>
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 收银员&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+<div class="tab-pane fade active in" id="show">
+
+    <table class="table table-striped" id="u1">
+
+        <thead>
+        <tr>
+            <th class="th_nomal hidden-xs">UID</th>
+            <th class="th_nomal">姓名</th>
+            <th class="th_nomal">性别</th>
+            <th class="hidden-xs">手机</th>
+            <th class="hidden-xs">身份证</th>
+            <th class="hidden-xs">验证</th>
+            <th class="hidden-xs">部门</th>
+            <th class="hidden-xs">在编</th>
+            <th class="hidden-xs">补贴</th>
+            <th class="hidden-xs">前台身份</th>
+            <th class="hidden-xs">后台身份</th>
+
+            <th class="th_edit">编辑</th>
+            <!--<th class="th_del">删除</th>-->
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {{forList::"cashier"}}
+        <tr>
+            <th class="hidden-xs" id="[[uid]]" scope="row">[[uid]]</th>
+            <td>[[name]]</td>
+            <td>[[sex]]</td>
+            <td class="hidden-xs">[[mobile]]</td>
+            <td class="hidden-xs">[[idcard]]</td>
+            <td class="hidden-xs">[[idcheck]]</td>
+            <td class="hidden-xs">[[depart]]</td>
+            <td class="hidden-xs">[[join]]</td>
+            <td class="hidden-xs">[[subsidy_type]]</td>
+            <td class="hidden-xs">[[type]]</td>
+            <td class="hidden-xs">[[ad_type]]</td>
+            <td>
+                <button type="button" class="btn btn-primary edit">编辑</button>
+            </td>
+            <!--<td>
+                <button type="button" class="btn btn-danger">删除</button>
+            </td>-->
+        </tr>
+        {{/forList::"cashier"}}
+        <tr><td colspan="12" class="">{{noneTip}}</td></tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="row">
+
+        <div class="col-md-1">
+            <div class="panel-default text-center">
+                <div class="panel-body" >
+                    <h4><span class="label label-default">共{{pages}}页</span></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                    {{forList::"plist"}}
+                    <li class="[[on]]"><a href="[[page_num]]">[[page_num]]</a></li>
+                    {{/forList::"plist"}}
+
+                    <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-md-1">
+            <div class="panel-default text-center">
+                <div class="panel-body" >
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--#列表-->
+
+
+<!--新增-->
+
+<!--#新增-->
+
+<!--编辑-->
+<div class="tab-pane fade" id="edit">
+
+
+    <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">UID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control uid" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control name">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">姓别</label>
+                <div class="col-sm-10">
+                    <select class="form-control sex">
+                        <option value="0">无</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">手机</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control mobile">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">身份证</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control idcard">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">验证</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control idcheck" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">部门</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control depart" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">在编</label>
+                <div class="col-sm-10">
+                    <select class="form-control join">
+                        <option value="0">非在编</option>
+                        <option value="1">在编</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">补贴</label>
+                <div class="col-sm-10">
+                    <select class="form-control subsidy_type">
+                        <option value="0">无</option>
+                        <option value="1">早餐</option>
+                        <option value="2">早午餐</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-2 control-label">前台身份</label>
+                <div class="col-sm-10">
+                    <select class="form-control type">
+                        <option value="1">普通</option>
+                        <option value="2">收银</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-2 control-label">后台身份</label>
+                <div class="col-sm-10">
+                    <select class="form-control ad_type">
+                        <option value="1">普通</option>
+                        <option value="2">收银</option>
+                        <option value="3">编辑</option>
+                        <option value="4">财务</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success edit_chanel">取消</button>
+                    <div class="padding"></div>
+                    <button type="submit" class="btn btn-primary edit_submit">提交</button>
+                </div>
+            </div>
+
+
+
+    </div>
+
+
+</div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////编辑提交动作
+    $edit_selector='#edit';
+    $edit_child='uid/.uid/val,name/.name/val,sex/.sex/opt,mobile/.mobile/val,' +
+    'idcard/.idcard/val,idcheck/.idcheck/val,depart/.depart/val,join/.join/opt,' +
+    'subsidy_type/.subsidy_type/opt,type/.type/opt,ad_type/.ad_type/opt';
+    $filter='.idcheck';
+
+    $('button.edit').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowid );//
+        if($rowId!=''){
+            $data={};$data.rowId=$rowId;
+            ajax.post('?/base/cashier_edit_ax',$data,function(result){
+                //console.log(result);//
+                $data_get=result.data;
+                ajax.setResult($edit_selector,$edit_child,$data_get);
+                $('#myTabs #edit-tab').show();
+                $('#myTabs a[href="#edit"]').tab('show');
+            });
+        }
+    });
+
+    $('button.edit_chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+    $('button.edit_submit').click(function(){
+        $submitData=ajax.submitData($edit_selector,$edit_child,$filter);
+        //console.log($submitData);//
+        ajax.post('?/base/cashier_submit_ax',$submitData,function(result){
+            ajax.msgbox(result,1);
+        });
+    });
+    //\\
+
+</script>

@@ -1,0 +1,83 @@
+
+
+<section class="page  page_header">
+    <div class="login">
+
+
+        <div class="demo">
+
+            <form id="id_card" action="javascript: id_card() ;">
+
+                <div class="demo_title">
+                    <p>身份证号登录</p>
+                    <input type="text" name="id_card" placeholder="请输入身份证号码"/>
+                    <input type="hidden" name="uid" value="{{uid}}" style="display: none"/>
+                </div>
+
+                <div class="demo_con js_idCard_btn" >
+                    <input type="submit" value="登陆" />
+                </div>
+
+            </form>
+
+            <form id="mobile" action="javascript: mobile() ;" style="display: none;">
+
+                <div class="demo_center">
+                    <p class="demo_centerFont js_centerFont">
+                        <span>姓名:{{name}}</span>
+                        <span>部门:{{depart}}</span>
+                    </p>
+                    <input type="text" name="mobile" placeholder="请输入微信绑定手机号"/>
+                </div>
+
+                <div class="demo_con" >
+                    <input type="submit" value="提交" />
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+</section>
+
+<script>
+
+    //form id='id_card'
+    function id_card(){
+        ajax.formPost($('#id_card'),'?/account/idCard_check_ax/',function (result){
+            ajax.msgbox(result);
+            if(result.errcode=='0'){
+                $('.js_idCard_btn').hide();
+                $('.js_centerFont span').eq(0).text('姓名:'+result.data.name);
+                $('.js_centerFont span').eq(1).text('部门:'+result.data.depart);
+                $('#mobile').fadeIn();
+            }
+        });
+    }
+
+    //form id='mobile'
+    function mobile(){
+        $id_card=$('#id_card input[name="id_card"]').val();
+        $uid=$('#id_card input[name="uid"]').val();
+        $form_data_add={"id_card":$id_card,"uid":$uid};
+        ajax.mixPost($('#mobile'),'?/account/mobile_check_ax/',$form_data_add,function (result){
+            ajax.msgbox(result);
+        });
+    }
+
+
+    $(document).ready(function(){
+
+        $('section').hide();
+        $('section').fadeIn();
+
+        /*ajax.post('?/account/idCard_ax/',{"data":'usrState'},function(result){
+
+            alert('ok_ax');
+
+        },'');*/
+    });
+
+</script>

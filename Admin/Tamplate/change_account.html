@@ -1,0 +1,301 @@
+<!--列表-->
+<ol class="breadcrumb">
+    <li><a href="#">充值管理</a></li>
+    <li><a href="#">充值</a></li>
+</ol>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="col-sm-2">
+            <input id="search_name" type="text" class="form-control" placeholder="姓名" >
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='endTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_sta' class='form-control' placeholder='开始日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden' value='' />-->
+        </div>
+
+        <div class="col-sm-3">
+            <div class='input-group date form_date'
+                 data-date='' data-date-format='yyyy-mm-dd' data-link-field='staTime' data-link-format='yyyy-mm-dd'>
+                <input id='search_end' class='form-control' placeholder='结束日期' size='16' type='text' value='' readonly>
+                <span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>
+            </div>
+            <!--<input type='hidden'  value='' />-->
+        </div>
+
+        <div class="col-sm-1" >
+            <button class="btn btn-primary search">搜索</button>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<ul id="myTabs" class="nav nav-tabs">
+    <li class="active" >
+        <a href="#show" id="show-tab" data-toggle="tab"> 账户&nbsp;&nbsp;
+            <span class="badge badge_diy">{{countList}}</span>
+        </a>
+    </li>
+
+
+    <li>
+        <a href="#edit" id="edit-tab" data-toggle="tab"> 编辑 </a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+    <div class="tab-pane fade active in" id="show">
+
+        <table class="table table-striped" id="u1">
+
+            <thead>
+            <tr>
+                <th class="th_nomal hidden-xs">ACID</th>
+                <th class="th_2x">姓名</th>
+                <th class="th_2x">钱包</th>
+                <th class="th_2x hidden-xs">补贴钱包</th>
+                <th class="hidden-xs">充值时间</th>
+
+                <th class="th_edit hidden-xs" colspan="2">充值</th>
+                <th class="th_edit">编辑</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {{forList::"account"}}
+            <tr>
+                <th class="hidden-xs" id="[[acc_id]]" scope="row">[[acc_id]]</th>
+                <td>[[uid]]</td>
+                <td>[[balance]]</td>
+                <td class="hidden-xs">[[subsidy]]</td>
+                <td class="hidden-xs">[[time_recharge]]</td>
+
+                <td class="hidden-xs">
+                    <input id="money_add_[[acc_id]]" type="text" class="form-control" size="1" placeholder="金额">
+                </td>
+                <td class="hidden-xs">
+                    <button type="button" class="btn btn-success recharge">充值</button>
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-primary edit">编辑</button>
+                </td>
+
+            </tr>
+            {{/forList::"account"}}
+            <tr><td colspan="8" class="">{{noneTip}}</td></tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+                        <h4><span class="label label-default">共{{pages}}页</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <nav class="text-center">
+                    <ul class="pagination">
+                        <li><a href="{{previous}}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+
+                        {{forList::"plist"}}
+                        <li class="[[on]]"><a href="[[page_url]]">[[page_num]]</a></li>
+                        {{/forList::"plist"}}
+
+                        <li><a href="{{next}}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="panel-default text-center">
+                    <div class="panel-body" >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--#列表-->
+
+
+    <!--新增-->
+
+    <!--#新增-->
+
+    <!--编辑-->
+    <div class="tab-pane fade" id="edit">
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group has-feedback">
+                <label for="a1" class="col-sm-2 control-label">ACID</label>
+                <div class="col-sm-10">
+                    <input id="a1" type="text" class="form-control acc_id" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a2" class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-10">
+                    <input id="a2" type="text" class="form-control name" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a2" class="col-sm-2 control-label">个人钱包</label>
+                <div class="col-sm-10">
+                    <input id="a2" type="text" class="form-control balance" >
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a10" class="col-sm-2 control-label">补贴钱包</label>
+                <div class="col-sm-10">
+                    <input id="a10" type="text" class="form-control subsidy" >
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label for="a11" class="col-sm-2 control-label">充值时间</label>
+                <div class="col-sm-10">
+                    <input id="a11" type="text" class="form-control time_recharge" readonly>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="panel-default text-center" style="margin-bottom: 0;">
+                <div class="panel-body" >
+                    <button type="button" class="btn btn-success edit_chanel">取消</button>
+                    <div class="padding"></div>
+                    <button type="button" class="btn btn-primary edit_submit">提交</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--#编辑-->
+
+<script>
+
+    $('#myTabs a').click(function(e){
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('#myTabs #edit-tab').hide();
+
+    $('#myTabs a:not(#edit-tab)').click(function(){
+        $('#myTabs #edit-tab').hide();
+    });
+
+
+    ////搜索动作
+    $(document).ready(function(){
+        $name=pathReq('name');
+        $('#search_name').val( $name );
+
+        $sta=pathReq('sta');
+        $end=pathReq('end');
+
+        $('#search_sta').val( $sta );
+        $('#search_end').val( $end );
+
+    });
+    $('button.search').bind('click',function(){
+        $name=$('#search_name').val();
+        $sta=$('#search_sta').val();
+        $end=$('#search_end').val();
+
+        $uri='';
+        if($name){ $uri+="/name-"+$name; }
+        if($sta){ $uri+="/sta-"+$sta; }
+        if($end){ $uri+="/end-"+$end; }
+
+        window.location.href='{{base_url}}'+$uri;
+    });
+    //\\
+
+
+    ////编辑提交动作
+    $edit_selector='#edit';
+    $edit_child='acc_id/.acc_id/val,name/.name/val,' +
+    'balance/.balance/val,subsidy/.subsidy/val,time_recharge/.time_recharge/val';
+    $filter='.name/.time_recharge';
+
+    $('button.edit').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        //alert( 'rowid:'+$rowid );//
+        if($rowId!=''){
+            $data={};$data.rowId=$rowId;
+            ajax.post('?/recharge/account_edit_ax',$data,function(result){
+                //console.log(result);//
+                $data_get=result.data;
+                ajax.setResult($edit_selector,$edit_child,$data_get);
+                $('#myTabs #edit-tab').show();
+                $('#myTabs a[href="#edit"]').tab('show');
+            });
+        }
+    });
+
+    $('button.edit_chanel').click(function(){
+        $('#myTabs #edit-tab').hide();
+        $('#myTabs a[href="#show"]').tab('show');
+    });
+
+    $('button.edit_submit').click(function(){
+        $submitData=ajax.submitData($edit_selector,$edit_child,$filter);
+        //console.log($submitData);return false;//
+        ajax.post('?/recharge/account_submit_ax',$submitData,function(result){
+            ajax.msgbox(result,1);
+        });
+    });
+    //\\
+
+    ////充值动作
+    $('button.recharge').click(function(){
+        $rowId=$(this).parent().parent().find('th').text();
+        $money_add=$('#money_add_'+$rowId).val();
+
+        $data={};$data.rowId=$rowId;$data.money_add=$money_add;
+        console.log($data);//return false;//
+
+        ajax.post('?/recharge/account_money_add_ax',$data,function(result){
+            ajax.msgbox(result,1);
+        });
+
+    });
+    //\\
+
+
+</script>

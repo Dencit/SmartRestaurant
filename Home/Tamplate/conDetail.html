@@ -1,0 +1,61 @@
+{{include::"include_head"}}
+
+
+
+<!--<header class="header clearfix">
+    <span onclick="javascript:window.history.go(-1);" class="header_back">返回</span>
+    <div class="headerTitle">{{title}}</div>
+</header>-->
+
+<section class="page page_footer page_header">
+    <div class="ConDetail clearfix">
+        <div class="ConDetailTop">
+            <a class="icon-arrowLeft" href="javascript:void(0);"></a>
+            <span class="ConDetailTopF">{{toMouth}}</span>
+            <a class="icon-arrowRight" href="javascript:void(0);"></a>
+        </div>
+        <div class="ConDetailAll">
+            <p class="ConDetailAll_l">本月总共消费:</p>
+            <p class="ConDetailAll_r"><span class="price_h">￥</span>{{total_money_mouth}}<span class="price_end"></span></p>
+        </div>
+        <div class="ConDetailList">
+
+            <ul>
+                {{forList::"payed_list"}}
+                <li>
+                    <a class="clearfix" href="javascript:void(0);">
+                        <div class="ConDetailListLeft">
+                            <p class="ConDetailList_h">
+                                <span class="ConDetailList_hDate">[[Ymd]]</span>
+                                <span class="ConDetailList_hWeek">[[weekday]]</span>
+                                <span class="ConDetailList_hTime">[[Hs]]</span>
+                            </p>
+                            <p class="ConDetailList_p">
+                                [[food_id_seri]]
+                            </p>
+                        </div>
+                        <div class="ConDetailListPay">
+                            <p class="ConDetailListPayCn">总共消费:</p>
+                            <p class="ConDetailListPayM">
+                                <span class="price_h">￥</span>[[total_money]]<span class="price_end"></span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                {{/forList::"payed_list"}}
+
+                {{none}}
+            </ul>
+
+
+
+        </div>
+    </div>
+
+
+</section>
+
+{{include::"include_nav"}}
+
+
+{{include::"include_foot"}}

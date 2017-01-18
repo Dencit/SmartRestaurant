@@ -1,0 +1,59 @@
+{{include::"include_head"}}
+
+<!--<header class="header clearfix">
+    <span onclick="javascript:window.history.go(-1);" class="header_back">返回</span>
+    <div class="headerTitle">{{title}}</div>
+</header>-->
+
+<section class="page  page_header">
+    <div class="pay">
+        <div class="payTitle">
+            <p>请向工作人员出示此二维码</p>
+
+            {{order_tip}}
+
+            <span>
+                个人消费:&nbsp;&nbsp;<b>{{people_money}}</b>&nbsp;元
+                &nbsp;&nbsp;
+                补助消费:&nbsp;&nbsp;<b>{{total_benefit}}</b>&nbsp;元
+            </span>
+        </div>
+        <span class="payDashed"></span>
+        <div class="payCode">
+            <img src="{{qrcode_url}}" alt="正在加载二维码..." id="{{order_no}}"/>
+        </div>
+        <!--<p>{{order_no}}</p>-->
+    </div>
+    <div class="payContact">
+        <p class="payContactCn">如有问题，请及时联系我们！</p>
+        <p class="payContactNumber">020-22099360</p>
+    </div>
+
+</section>
+
+<script>
+
+    function checkPay(){
+
+        ajax.post('?/payment/checkPay_ax/',{},function(result){
+            //console.log(result);//
+
+            if(result.errcode=='-1'){
+                setTimeout('checkPay()',2000);
+            }
+            else{
+                ajax.msgbox(result);
+            }
+
+        } );
+    }
+
+    $(function(){
+
+        setTimeout('checkPay()',2000);
+
+    })
+
+</script>
+
+{{include::"include_foot"}}
