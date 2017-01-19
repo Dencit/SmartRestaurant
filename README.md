@@ -8,6 +8,6 @@
 
 
 <br/>使用了自研框架 simpleMVC2016年的旧版本
-<br/>最新源码: https://github.com/Dencit/SimpleMVC
+<br/>最新框架源码：https://github.com/Dencit/SimpleMVC
 
 <br/>注：数据库不公开,关键密码隐藏, 该项目仅做语法参考。
